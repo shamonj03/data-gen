@@ -1,0 +1,24 @@
+{
+  "schema": "../schemas/customers.json",
+  "output": {
+    "file": "customers.csv",
+    "delimiter": ",",
+    "table": {
+      "rows": "customers",
+      "columns": [
+        "customer_id",
+        {"field": "first_name", "title": "First Name"},
+        {"field": "last_name", "title": "Last Name"},
+        "nickname",
+        "ssn",
+        "dob",
+        "phone",
+        "email",
+        "card_number",
+        "account_number",
+        "branch_code",
+        "balance"
+      ]
+    }
+  }
+}

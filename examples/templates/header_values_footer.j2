@@ -1,0 +1,5 @@
+{{ row('H', header.routing_number, now | datefmt('%Y%m%d'), header.institution_name) }}
+{% for t in transactions %}
+{{ row('D', t.posted_date, t.account_number, t.name, t.ssn, t.tx_type, t.amount) }}
+{% endfor %}
+{{ row('T', transactions | length) }}

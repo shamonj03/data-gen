@@ -1,0 +1,7 @@
+{
+  "schema": "../schemas/customers.json",
+  "output": {
+    "file": "customers_nohdr.csv",
+    "table": {"rows": "customers", "header": false}
+  }
+}

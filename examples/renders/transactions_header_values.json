@@ -1,0 +1,9 @@
+{
+  "schema": "../schemas/transactions.json",
+  "output": {
+    "file": "transactions_{now:%Y%m%d}.txt",
+    "template": "../templates/header_values_footer.j2",
+    "delimiter": "|",
+    "quoting": "none"
+  }
+}

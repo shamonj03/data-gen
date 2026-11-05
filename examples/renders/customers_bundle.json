@@ -1,0 +1,26 @@
+{
+  "schema": "../schemas/customers.json",
+  "outputs": [
+    {
+      "file": "customers.csv",
+      "table": {
+        "rows": "customers"
+      }
+    },
+    {
+      "file": "customers.txt",
+      "delimiter": "pipe",
+      "quoting": "none",
+      "table": {
+        "rows": "customers",
+        "header": false
+      }
+    },
+    {
+      "file": "customers.xlsx",
+      "table": {
+        "rows": "customers"
+      }
+    }
+  ]
+}

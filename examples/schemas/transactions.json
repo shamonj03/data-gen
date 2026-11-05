@@ -1,0 +1,24 @@
+{
+  "locale": "en_US",
+  "data": {
+    "header": {
+      "type": "object",
+      "fields": {
+        "routing_number": {"type": "routing_number"},
+        "institution_name": {"faker": "company", "max_length": 30}
+      }
+    },
+    "transactions": {
+      "type": "list",
+      "count": {"min": 10, "max": 30},
+      "fields": {
+        "posted_date": {"type": "date", "start": "-30d", "end": "today", "format": "%Y%m%d"},
+        "account_number": {"type": "account_number"},
+        "name": {"faker": "name", "max_length": 22},
+        "ssn": {"type": "ssn"},
+        "tx_type": {"type": "choice", "values": ["DEBIT", "CREDIT"], "weights": [7, 3]},
+        "amount": {"type": "decimal", "min": 1, "max": 5000}
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{% set ft = ach_file_totals(batches) %}
+101 {{ params.immediate_destination | num(9) }}{{ params.immediate_origin | rjust(10) }}{{ now | datefmt('%y%m%d%H%M') }}A094101{{ params.destination_name | ascii | upper | ljust(23) }}{{ params.origin_name | ascii | upper | ljust(23) }}{{ '' | ljust(8) }}
+{% for b in batches %}
+{% set bt = ach_batch_totals(b.entries) %}
+5{{ b.service_class_code }}{{ b.company_name | ascii | upper | ljust(16) }}{{ '' | ljust(20) }}{{ b.company_id | ljust(10) }}{{ b.sec_code }}{{ b.entry_description | upper | ljust(10) }}{{ '' | ljust(6) }}{{ b.effective_date | datefmt('%y%m%d') }}   1{{ params.odfi | num(8) }}{{ loop.index | num(7) }}
+{% for e in b.entries %}
+6{{ e.transaction_code }}{{ e.routing_number | num(9) }}{{ e.account_number | ljust(17) }}{{ e.amount | cents | num(10) }}{{ e.individual_id | ljust(15) }}{{ e.name | ascii | upper | ljust(22) }}  {{ 1 if e.addenda else 0 }}{{ params.odfi | num(8) }}{{ e.trace_seq | num(7) }}
+{% for a in e.addenda %}
+705{{ a.info | ascii | ljust(80) }}{{ loop.index | num(4) }}{{ e.trace_seq | num(7) }}
+{% endfor %}
+{% endfor %}
+8{{ b.service_class_code }}{{ bt.entry_addenda_count | num(6) }}{{ bt.entry_hash | num(10) }}{{ bt.total_debit_cents | num(12) }}{{ bt.total_credit_cents | num(12) }}{{ b.company_id | ljust(10) }}{{ '' | ljust(19) }}{{ '' | ljust(6) }}{{ params.odfi | num(8) }}{{ loop.index | num(7) }}
+{% endfor %}
+9{{ ft.batch_count | num(6) }}{{ ft.block_count | num(6) }}{{ ft.entry_addenda_count | num(8) }}{{ ft.entry_hash | num(10) }}{{ ft.total_debit_cents | num(12) }}{{ ft.total_credit_cents | num(12) }}{{ '' | ljust(39) }}

@@ -1,0 +1,7 @@
+{{ row('batch', 'trace_number', 'transaction_code', 'routing_number', 'account_number', 'amount', 'name') }}
+{% for b in batches %}
+{% set batch_no = loop.index %}
+{% for e in b.entries %}
+{{ row(batch_no, params.odfi ~ (e.trace_seq | num(7)), e.transaction_code, e.routing_number, e.account_number, e.amount, e.name) }}
+{% endfor %}
+{% endfor %}

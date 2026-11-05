@@ -1,0 +1,10 @@
+{
+  "schema": "../schemas/customers.json",
+  "output": {
+    "file": "customers.xlsx",
+    "sheet_name": "Customers",
+    "table": {
+      "rows": "customers"
+    }
+  }
+}

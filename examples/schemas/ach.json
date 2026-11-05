@@ -1,0 +1,44 @@
+{
+  "locale": "en_US",
+  "params": {
+    "immediate_destination": "512345677",
+    "immediate_origin": "1234567890",
+    "destination_name": "TEST RECEIVING BANK",
+    "origin_name": "TEST ORIGINATOR",
+    "odfi": "51234567"
+  },
+  "data": {
+    "batches": {
+      "type": "list",
+      "count": {"min": 3, "max": 6},
+      "fields": {
+        "service_class_code": {"type": "constant", "value": "200"},
+        "company_name": {"faker": "company", "max_length": 16},
+        "company_id": {"type": "pattern", "pattern": "1#########"},
+        "sec_code": {"type": "choice", "values": ["PPD", "CCD"]},
+        "entry_description": {"type": "choice", "values": ["PAYROLL", "VENDORPAY"]},
+        "effective_date": {"type": "date", "start": "+1d", "end": "+3d"},
+        "entries": {
+          "type": "list",
+          "count": {"min": 2, "max": 20},
+          "fields": {
+            "transaction_code": {"type": "choice", "values": ["22", "27", "32", "37"]},
+            "routing_number": {"type": "routing_number"},
+            "account_number": {"type": "account_number", "min_length": 8, "max_length": 17},
+            "amount": {"type": "decimal", "min": 1, "max": 25000},
+            "individual_id": {"type": "pattern", "pattern": "ID#########"},
+            "name": {"faker": "name", "max_length": 22, "on_invalid": "retry"},
+            "trace_seq": {"type": "sequence"},
+            "addenda": {
+              "type": "list",
+              "count": {"min": 0, "max": 1},
+              "fields": {
+                "info": {"faker": "sentence", "max_length": 80}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

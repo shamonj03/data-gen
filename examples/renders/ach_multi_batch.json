@@ -1,0 +1,17 @@
+{
+  "schema": "../schemas/ach.json",
+  "output": {
+    "file": "ach_{now:%Y%m%d}.ach",
+    "template": "../templates/nacha.ach.j2",
+    "newline": "\r\n",
+    "line_width": 94,
+    "encoding": "ascii",
+    "postprocess": [
+      {
+        "name": "block_pad",
+        "size": 10,
+        "fill": "9"
+      }
+    ]
+  }
+}

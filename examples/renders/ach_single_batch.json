@@ -1,0 +1,37 @@
+{
+  "schema": "../schemas/ach.json",
+  "set": {
+    "data.batches.count": 1,
+    "data.batches.fields.service_class_code.value": "220",
+    "data.batches.fields.sec_code": {
+      "type": "constant",
+      "value": "PPD"
+    },
+    "data.batches.fields.entry_description": {
+      "type": "constant",
+      "value": "PAYROLL"
+    },
+    "data.batches.fields.entries.count": {
+      "min": 5,
+      "max": 25
+    },
+    "data.batches.fields.entries.fields.transaction_code.values": [
+      "22",
+      "32"
+    ]
+  },
+  "output": {
+    "file": "ach_{now:%Y%m%d}.ach",
+    "template": "../templates/nacha.ach.j2",
+    "newline": "\r\n",
+    "line_width": 94,
+    "encoding": "ascii",
+    "postprocess": [
+      {
+        "name": "block_pad",
+        "size": 10,
+        "fill": "9"
+      }
+    ]
+  }
+}

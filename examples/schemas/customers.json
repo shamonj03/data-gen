@@ -1,0 +1,23 @@
+{
+  "locale": "en_US",
+  "data": {
+    "customers": {
+      "type": "list",
+      "count": 25,
+      "fields": {
+        "customer_id": {"type": "sequence", "start": 1, "length": 8, "pad": "0"},
+        "first_name": {"faker": "first_name", "max_length": 15},
+        "last_name": {"faker": "last_name", "max_length": 20, "on_invalid": "retry"},
+        "nickname": {"type": "string", "charset": "letters", "min_length": 3, "max_length": 12},
+        "ssn": {"type": "ssn"},
+        "dob": {"type": "date", "start": "1940-01-01", "end": "2005-12-31", "format": "%Y-%m-%d"},
+        "phone": {"type": "pattern", "pattern": "(###) 555-01##"},
+        "email": {"faker": "email"},
+        "card_number": {"type": "card_number", "brand": "visa"},
+        "account_number": {"type": "account_number", "length": 12},
+        "branch_code": {"type": "int", "min": 1, "max": 999, "length": 4, "pad": "0"},
+        "balance": {"type": "decimal", "min": 0, "max": 50000}
+      }
+    }
+  }
+}
